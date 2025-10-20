@@ -1,44 +1,81 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="description" content="Portfolio of Liudmila Viynskovsky — interior designer specializing in modern cozy spaces and furniture design.">
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio — Liudmila Viynskovsky</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="favicon.ico">
+
   <style>
-    :root{
-      --bg:#f8fafc;
-      --accent: #b16a38; /* теплый древесный */
-      --card: #fff8f0;    /* светлый кремовый */
-      --muted: #5c4632;   /* мягкий коричневый */
-      --glass: rgba(0,0,0,0.03);
-      --radius:18px;
-      color-scheme: light;
+    :root {
+      --bg: #0f2438;           /* тёмно-синий фон */
+      --accent: #c48a4a;       /* тёплый древесный */
+      --card: #1b334b;         /* цвет панелей за баром */
+      --muted: #b0c4d4;        /* мягкий серо-голубой текст */
+      --glass: rgba(255,255,255,0.05);
+      --radius: 18px;
+      color-scheme: dark;
     }
+    @media (max-width:400px) {
+      .container { padding: 16px; }
+      .btn, .chip { font-size: 14px; padding: 8px 12px; }
+    }
+
     *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:linear-gradient(180deg,var(--bg),#f1f5f9 60%); color:#1e293b; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+      margin: 0;
+      background: var(--bg);
+      color: #f4f4f4;
+      transition: background-color 0.5s, color 0.5s;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
     .container{max-width:1100px;margin:36px auto;padding:28px}
 
-    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
     .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ffb86b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),#a36b30);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      color:#fff
+    }
     h1{font-size:20px;margin:0}
     p.lead{color:var(--muted);margin:4px 0 0;font-size:14px}
 
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;margin-top:28px}
     .hero-card{
-      /* background:var(--card); -- можно оставить */
+      background:var(--card); /* -- можно оставить */
       padding:28px;
       border-radius:var(--radius);
       /* Новая, более глубокая тень */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease; /* Добавить микро-анимацию */
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Добавить микро-анимацию */
     }
     .hero-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.5);
     }
     .hero h2{margin:0;font-size:28px}
     .hero .meta{color:var(--muted);margin-top:10px}
@@ -46,14 +83,16 @@
       display:inline-block;
       padding:10px 16px;
       border-radius:12px;
-      background:linear-gradient(90deg,var(--accent),#ffb86b);
-      color:white;
-      font-weight:600;
-      text-decoration:none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); /* Добавить тень акцентного цвета */
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      cursor:pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Добавить тень акцентного цвета */
     }
     .btn:hover {
+      background: #d19b58;
       transform: translateY(-1px); /* Легкий подъем */
       box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
     }
@@ -67,13 +106,21 @@
       background-size:cover;
       background-position:center;
       flex-shrink:0;
-      border-radius: 50%; /* Сделать круглым */
+      /*border-radius: 50%; !* Сделать круглым *!*/
       border: 4px solid var(--card); /* Добавить тонкую белую обводку */
     }
     .about p{color:var(--muted);line-height:1.55}
 
     .filters{margin-top:26px;display:flex;gap:10px}
-    .chip{padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid rgba(0,0,0,0.08);cursor:pointer;color:var(--muted);font-weight:600}
+    .chip{
+      padding:8px 12px;
+      /*border-radius:999px;*/
+      background:var(--glass);
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor:pointer;
+      color:var(--muted);
+      font-weight:600
+    }
     .chip.active {
       background: linear-gradient(145deg, #d9b384, #b16a38);
       color: white;
@@ -86,7 +133,7 @@
       border-radius:14px;
       overflow:hidden;
       min-height:220px;
-      background:#e2e8f0;
+      background:#203b54;
       cursor:pointer;
       transition: transform 0.3s, box-shadow 0.3s;
     }
@@ -94,7 +141,15 @@
       transform: translateY(-4px); /* Поднять проект */
       box-shadow: 0 15px 30px rgba(0,0,0,0.15); /* Добавить тень */
     }
-    .project .meta{position:absolute;left:18px;bottom:18px;color:white;background:linear-gradient(180deg,rgba(0,0,0,0.3),rgba(0,0,0,0.7));padding:10px 12px;border-radius:10px}
+    .project .meta{
+      position:absolute;
+      left:18px;
+      bottom:18px;
+      color:white;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+      padding:10px 12px;
+      border-radius:10px
+    }
     .project img{
       width:100%;
       height:100%;
@@ -103,9 +158,26 @@
       transition: transform 0.4s;
     }
 
-    footer{margin-top:36px;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.01));display:flex;justify-content:space-between;align-items:center}
+    footer{
+      margin-top:36px;
+      padding:18px;
+      border-radius:12px;
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display:flex;
+      justify-content:space-between;
+      align-items:center
+    }
+
     .contact-form{display:flex;flex-direction:column;gap:8px}
-    .input,textarea{background:transparent;border:1px solid rgba(0,0,0,0.1);padding:10px;border-radius:10px;color:inherit}
+    .input, textarea{
+      background:transparent;
+      border:1px solid rgba(0,0,0,0.1);
+      padding:10px;
+      border-radius:10px;
+      color:inherit
+    }
 
     @media (max-width:1000px){.hero{grid-template-columns:1fr} .gallery{grid-template-columns:repeat(2,1fr)} }
     @media (max-width:620px){.gallery{grid-template-columns:1fr} .avatar{display:none}}
@@ -113,6 +185,40 @@
     .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;padding:20px;z-index:80;visibility:hidden;opacity:0;transition:opacity .2s,visibility .2s}
     .lightbox.open{visibility:visible;opacity:1}
     .lightbox img{max-width:90%;max-height:90%;border-radius:12px}
+
+    h1, h2, h3, .logo {
+      font-family: "Playfair Display", serif;
+      letter-spacing: 1px;
+      color: #e6f0ff;
+      text-shadow:
+        0 0 6px rgba(80,150,255,0.5),
+        0 0 12px rgba(60,130,255,0.4),
+        0 0 24px rgba(80,150,255,0.3);
+    }
+
+    /* Логотип можно сделать чуть теплее — эффект латунной таблички */
+    .logo {
+      font-weight: 800;
+      color: #fff8f0;
+      background: linear-gradient(145deg, #c48a4a, #a36b30);
+      box-shadow:
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        0 6px 15px rgba(0,0,0,0.4);
+      text-shadow:
+        0 0 4px rgba(255,240,200,0.3),
+        0 0 10px rgba(255,210,130,0.4);
+    }
+
+    /* Акцент на заголовках разделов */
+    section h2 {
+      font-size: 26px;
+      color: #c7dbf9;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-shadow:
+        0 0 5px rgba(120,180,255,0.4),
+        0 0 10px rgba(100,160,255,0.3);
+    }
   </style>
 </head>
 <body>
@@ -220,10 +326,10 @@
         <div class="contact-form" style="max-width:420px">
           <input class="input" placeholder="Name" id="name">
           <input class="input" placeholder="Email" id="email">
-          <textarea class="input" placeholder="Massage" rows="4" id="message"></textarea>
+          <textarea class="input" placeholder="Message" rows="4" id="message"></textarea>
           <div style="display:flex;gap:8px">
-            <a class="btn" id="send">Send</a>
-            <a class="chip" href="mailto:liudmila@example.com">liudmila@example.com</a>
+            <button class="btn" id="send" type="button">Send</button>
+            <a class="chip" href="mailto:milystyledirect@gmail.com">milystyledirect@gmail.com</a>
           </div>
         </div>
       </div>
@@ -270,7 +376,7 @@
       if(!name||!email||!msg){ alert('Please, fulfill all fields.'); return }
       const subject = encodeURIComponent('Request from '+name);
       const body = encodeURIComponent(msg+'\n\nContact: '+email);
-      window.location.href = 'mailto:ivan@example.com?subject='+subject+'&body='+body;
+      window.location.href = 'mailto:milystyledirect@gmail.com?subject='+subject+'&body='+body;
     })
 
     document.getElementById('view-cv').addEventListener('click', ()=>{
