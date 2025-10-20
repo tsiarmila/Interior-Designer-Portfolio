@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Liudmila Viynskovsky</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f8fafc;
+      --accent: #b16a38; /* теплый древесный */
+      --card: #fff8f0;    /* светлый кремовый */
+      --muted: #5c4632;   /* мягкий коричневый */
+      --glass: rgba(0,0,0,0.03);
+      --radius:18px;
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:linear-gradient(180deg,var(--bg),#f1f5f9 60%); color:#1e293b; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    .container{max-width:1100px;margin:36px auto;padding:28px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ffb86b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+    h1{font-size:20px;margin:0}
+    p.lead{color:var(--muted);margin:4px 0 0;font-size:14px}
+
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;margin-top:28px}
+    .hero-card{
+      /* background:var(--card); -- можно оставить */
+      padding:28px;
+      border-radius:var(--radius);
+      /* Новая, более глубокая тень */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease; /* Добавить микро-анимацию */
+    }
+    .hero-card:hover {
+      transform: translateY(-2px);
+    }
+    .hero h2{margin:0;font-size:28px}
+    .hero .meta{color:var(--muted);margin-top:10px}
+    .btn{
+      display:inline-block;
+      padding:10px 16px;
+      border-radius:12px;
+      background:linear-gradient(90deg,var(--accent),#ffb86b);
+      color:white;
+      font-weight:600;
+      text-decoration:none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); /* Добавить тень акцентного цвета */
+    }
+    .btn:hover {
+      transform: translateY(-1px); /* Легкий подъем */
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+    }
+
+    .about{margin-top:22px;display:flex;gap:22px;align-items:center}
+    .avatar{
+        width:120px;
+        height:120px;
+        border-radius:12px;
+      background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder');
+      background-size:cover;
+      background-position:center;
+      flex-shrink:0;
+      border-radius: 50%; /* Сделать круглым */
+      border: 4px solid var(--card); /* Добавить тонкую белую обводку */
+    }
+    .about p{color:var(--muted);line-height:1.55}
+
+    .filters{margin-top:26px;display:flex;gap:10px}
+    .chip{padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid rgba(0,0,0,0.08);cursor:pointer;color:var(--muted);font-weight:600}
+    .chip.active {
+      background: linear-gradient(145deg, #d9b384, #b16a38);
+      color: white;
+      box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+    .project{
+      position:relative;
+      border-radius:14px;
+      overflow:hidden;
+      min-height:220px;
+      background:#e2e8f0;
+      cursor:pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .project:hover {
+      transform: translateY(-4px); /* Поднять проект */
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15); /* Добавить тень */
+    }
+    .project .meta{position:absolute;left:18px;bottom:18px;color:white;background:linear-gradient(180deg,rgba(0,0,0,0.3),rgba(0,0,0,0.7));padding:10px 12px;border-radius:10px}
+    .project img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition: transform 0.4s;
+    }
+
+    footer{margin-top:36px;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.01));display:flex;justify-content:space-between;align-items:center}
+    .contact-form{display:flex;flex-direction:column;gap:8px}
+    .input,textarea{background:transparent;border:1px solid rgba(0,0,0,0.1);padding:10px;border-radius:10px;color:inherit}
+
+    @media (max-width:1000px){.hero{grid-template-columns:1fr} .gallery{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:620px){.gallery{grid-template-columns:1fr} .avatar{display:none}}
+
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;padding:20px;z-index:80;visibility:hidden;opacity:0;transition:opacity .2s,visibility .2s}
+    .lightbox.open{visibility:visible;opacity:1}
+    .lightbox img{max-width:90%;max-height:90%;border-radius:12px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">LV</div>
+        <div>
+          <h1>Liudmila Viynskovsky — Interior Designer</h1>
+          <p class="lead">Interior designer, I create cozy modern spaces and designer furniture</p>
+        </div>
+      </div>
+      <nav>
+        <a class="btn" href="#contact">Contact us</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div class="hero-card">
+        <h2>I create interiors for a comfortable life</h2>
+        <p class="meta">I work with clients from idea to implementation: design, selection of materials and author supervision.</p>
+
+        <div class="about">
+          <div class="avatar"></div>
+          <div>
+            <p>I specialize in residential and commercial projects — apartments, houses, cafes and offices. My goal is to combine aesthetics, functionality and comfort.</p>
+            <div style="margin-top:12px">
+              <a class="chip" id="view-cv">Download resume</a>
+              <a class="chip" href="#projects" style="margin-left:8px">View projects</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside style="align-self:start">
+        <div class="hero-card">
+          <h3 style="margin:0 0 8px 0">Services</h3>
+          <ul style="color:var(--muted);margin:0;padding-left:18px">
+            <li>Conceptual design</li>
+            <li>Working documentation</li>
+            <li>Selection of furniture and materials</li>
+            <li>Author's supervision</li>
+          </ul>
+          <div style="margin-top:12px">
+            <strong>Cost of consultation:</strong>
+            <p style="margin:6px 0 0;color:var(--muted)">from 50€ — online</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section id="projects">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:26px">
+        <h2 style="margin:0">Selected projects</h2>
+        <div class="filters" id="filters">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="apartment">Apartments</button>
+          <button class="chip" data-filter="house">Houses</button>
+          <button class="chip" data-filter="commercial">Commerce</button>
+        </div>
+      </div>
+
+      <div class="gallery" id="gallery">
+        <div class="project" data-type="apartment" data-title="Rocky Apartment">
+          <img src="images/Rocky_Apartment.png" alt="Rocky Apartment">
+          <div class="meta"><strong>Rocky Apartment</strong><br><small>Kranj, 2024</small></div>
+        </div>
+
+        <div class="project" data-type="house" data-title="Scandy-lounge">
+          <img src="images/Scandy-lounge.png" alt="Scandy-lounge">
+          <div class="meta"><strong>Scandy-lounge</strong><br><small>Portoroz, 2023</small></div>
+        </div>
+
+        <div class="project" data-type="commercial" data-title="Kafe BlueBean">
+          <img src="images/Kafe_BlueBean.png" alt="Kafe BlueBean">
+          <div class="meta"><strong>Kafe BlueBean</strong><br><small>Koper, 2022</small></div>
+        </div>
+
+        <div class="project" data-type="apartment" data-title="Minimalist apartment">
+          <img src="images/Minimalist_apartment.png" alt="Minimalist apartment">
+          <div class="meta"><strong>Minimalist apartment</strong><br><small>Ljubljana, 2021</small></div>
+        </div>
+
+        <div class="project" data-type="house" data-title="Summer house">
+          <img src="images/Summer_house.png" alt="Summer house">
+          <div class="meta"><strong>Summer house</strong><br><small>Jamnik, 2020</small></div>
+        </div>
+
+        <div class="project" data-type="house" data-title="Provance house">
+          <img src="images/Provance_house.png" alt="Provance house">
+          <div class="meta"><strong>Provance house</strong><br><small>Isola, 2020</small></div>
+        </div>
+
+        <div class="project" data-type="commercial" data-title="Office-studio">
+          <img src="images/Office-studio.png" alt="Office-studio">
+          <div class="meta"><strong>Office-studio</strong><br><small>Kropa, 2024</small></div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div style="flex:1">
+        <h3 style="margin:0 0 8px 0">Contact us</h3>
+        <p style="color:var(--muted);margin:0 0 12px 0">I reply within 2 business days.</p>
+        <div class="contact-form" style="max-width:420px">
+          <input class="input" placeholder="Name" id="name">
+          <input class="input" placeholder="Email" id="email">
+          <textarea class="input" placeholder="Massage" rows="4" id="message"></textarea>
+          <div style="display:flex;gap:8px">
+            <a class="btn" id="send">Send</a>
+            <a class="chip" href="mailto:liudmila@example.com">liudmila@example.com</a>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:right;min-width:220px;color:var(--muted)">
+        <div><strong>Liudmila Viynskovsky</strong></div>
+        <div style="margin-top:8px">Interior Designer<br>Phone: +386 00 000 0000</div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="lightbox">
+  </div>
+
+  <script>
+    document.querySelectorAll('#filters .chip').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('#filters .chip').forEach(c=>c.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.gallery .project').forEach(p=>{
+          if(f==='all' || p.dataset.type===f){ p.style.display='block' } else { p.style.display='none' }
+        })
+      })
+    })
+
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = lightbox.querySelector('img');
+    document.querySelectorAll('.project').forEach(p=>{
+      p.addEventListener('click', ()=>{
+        const src = p.querySelector('img').src;
+        const title = p.dataset.title || '';
+        lbImg.src = src;
+        lbImg.alt = title;
+        lightbox.classList.add('open');
+      })
+    })
+    lightbox.addEventListener('click', ()=>{ lightbox.classList.remove('open'); lbImg.src = '' })
+
+    document.getElementById('send').addEventListener('click', ()=>{
+      const name=document.getElementById('name').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const msg=document.getElementById('message').value.trim();
+      if(!name||!email||!msg){ alert('Please, fulfill all fields.'); return }
+      const subject = encodeURIComponent('Request from '+name);
+      const body = encodeURIComponent(msg+'\n\nContact: '+email);
+      window.location.href = 'mailto:ivan@example.com?subject='+subject+'&body='+body;
+    })
+
+    document.getElementById('view-cv').addEventListener('click', ()=>{
+      const url = 'https://example.com/CV_Liudmila_Viynskovsky.pdf';
+      window.open(url, '_blank');
+    })
+  </script>
+</body>
+</html>
